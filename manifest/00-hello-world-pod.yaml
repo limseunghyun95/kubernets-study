@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod # 쿠버네티스 오브젝트 타입
+metadata:
+  name: pod-sample # pod 이름으로 필수이다.
+spec: # Pod의 속성을 정의
+  containers: # Pod 내 컨테이너들을 정의
+  - image: ubuntu # 컨테이너 내 사용할 이미지
+    name: ubuntu # 컨테이너의 이름
+    command: ['echo'] # 컨테이너에 실행할 명령어
+    args: ['Hello World'] # 컨테이너에 전달할 변수
