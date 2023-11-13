@@ -3,7 +3,33 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: webapp
+  labels:
+    app: webap
+    # release와 같은 레이블을 이용해서 중단 없이 배포가 가능하다.
+    # 레이블의 값을 변경하고 새로운 파드 생성
+    # 서비스에서 변경된 값을 selector에서 지정
+    release: '0'
+
 spec:
   containers:
   - name: webapp
     image: richardchesterwood/k8s-fleetman-webapp-angular:release0
+
+---
+# 구분자
+# YAML based on Udemy 'kubernets microservices aws cloud'
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webapp-release-0.5
+  labels:
+    app: webap
+    # release와 같은 레이블을 이용해서 중단 없이 배포가 가능하다.
+    # 레이블의 값을 변경하고 새로운 파드 생성
+    # 서비스에서 변경된 값을 selector에서 지정
+    release: '0.5'
+
+spec:
+  containers:
+  - name: webapp
+    image: richardchesterwood/k8s-fleetman-webapp-angular:release0-5
