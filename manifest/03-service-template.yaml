@@ -1,0 +1,13 @@
+apiVersion: v1 # 서비스는 코어 v1 API를 사용
+kind: Service
+
+metadata:
+  name: service-01 # 서비스 이름
+
+spec:
+  selector:
+    app: deploy-01 # app 레이블의 값이 <label-value> 인 모든 파드가 대상
+  ports:
+  - name: service-port
+    port: 80
+    targetPort: 80

@@ -1,0 +1,27 @@
+# Deployment는 v1에 속한다.
+apiVersion: apps/v1
+kind: Deployment
+
+# 메타데이터 정의
+metadata:
+  name: deploy-01
+
+# 자신의 관리 대상을 결정하는 레이블 셀렉터 정의
+# 디플로이먼트에서는 app 레이블을 사용하는데, 레이블은 임의의 키-값 쌍이다.
+spec:
+  selector:
+    matchLabels:
+      app: deploy-01
+
+  # 템플릿은 디플로이먼트가 파드를 만들 때 사용
+  # 디플로이먼트가 관리하는 파드는 이름이 없다. 대신, 레이블 셀렉터와 일치하는 레이블을 지정해야 한다.
+  template:
+    metadata:
+      labels:
+        app: deploy-01
+
+    # 파드의 스펙을 정의
+    spec:
+      containers:
+      - name: web
+        image: kiamol/ch02-hello-kiamol
