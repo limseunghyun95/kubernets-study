@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: hello-hayoung-1
+
+spec:
+  replicas: 255
+  selector:
+    matchLabels:
+      app: hello-hayoung-1
+
+  template:
+    metadata:
+      labels:
+        app: hello-hayoung-1
+
+    spec:
+      containers:
+      - name: web
+        image: kiamol/ch02-hello-kiamol

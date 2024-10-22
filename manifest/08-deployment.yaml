@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment # 디플로이먼트 이름
+  labels:
+    app: nginx
+spec:
+  replicas: 3 # 지정된 숫자만큼의 레플리카 파드 생성하는 레플리카셋을 생성
+  selector: # 생성된 레플리카셋이 관리할 파드를 찾아내는 방법. 여기서는 matchLabels를 사용한다. # 파드 템플릿 레이블과 적절한 셀렉터를 반드시 명시해야 하며, 레이블 혹은 셀렉터는 다른 컨트롤러와 겹치지 않아야 한다.
+    matchLabels:
+      app: nginx
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: nginx # 파드의 레이블
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: whoami-deployment
+  labels:
+    app: whoami
+
+spec:
+  selector:
+    matchLabels:
+      app: whoami
+
+  template:
+    metadata:
+      labels:
+        app: whoami
+    spec:
+      containers:
+      - name: web
+        image: kiamol/ch02-whoami
+        ports:
+        - containerPort: 80

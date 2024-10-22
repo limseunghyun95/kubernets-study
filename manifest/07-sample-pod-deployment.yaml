@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+
+# metadat에는 이름(필수)과 레이블(비필수)을 작성한다.
+metadata:
+  name: sample-deployment
+  labels:
+    app: redis
+
+# spec: 리소스 정의 내용
+spec:
+  # 디폴리어먼트와 같은 컨트롤러 객체는 자신이 관리 대상을 결정하는 레이블 셀렉터가 정의된다.
+  # 레이블은 임의의 키-값 쌍이다.
+  selector:
+    matchLabels:
+      app: redis
+  # template: 디플로이먼트가 파드를 만들 때 사용
+  # 디플로이먼트 정의 내 파드의 정의에는 이름이 없다. 대신, 레이블 셀렉터와 일치하는 레이블을 지정
+  template:
+    metadata:
+      labels:
+        app: redis
+    # 파드의 경우, 컨테이너를 정의한다. 컨테이너는 이름과 이미지로 정의한다.
+    spec:
+      containers:
+      - name: redis
+        image: redis
+        ports:
+        - containerPort: 6379
